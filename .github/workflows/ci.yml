@@ -39,7 +39,7 @@ jobs:
         uses: docker/metadata-action@v5
         with:
           images: besogon1/test
-          tags: ${{ github.ref }}
+          tags: ${{ github.ref_name }}
 
       - name: Build and push Docker image
         id: push
