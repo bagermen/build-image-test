@@ -13,6 +13,10 @@ on:
   release:
     types: [published]
 
+env:
+  REGISTRY: docker.io
+  IMAGE_NAME:  besogon1/test
+
 jobs:
   push_to_registry:
     name: Push Docker image to Docker Hub
@@ -38,8 +42,10 @@ jobs:
         id: meta
         uses: docker/metadata-action@v5
         with:
-          images: besogon1/test
-          tags: ${{ github.ref_name }}
+          images: ${{ env.IMAGE_NAME}}
+          tags: |
+            - type=ref,enable=true,event=release
+            - type=raw,value=latest,enable={{is_default_branch}}
 
       - name: Build and push Docker image
         id: push
