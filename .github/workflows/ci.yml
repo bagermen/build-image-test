@@ -30,13 +30,11 @@ jobs:
       - name: Check out the repo
         uses: actions/checkout@v4
         with:
-          ref: ${{ github.ref }}
           fetch-depth: 0
 
       - name: Read SHA of main branch
         id: main_info
         run: |
-          echo "::debug::$(ls -la)"
           sha=$(git rev-parse  origin/main)
           echo "::add-mask::$sha"
           echo "sha=$sha" >> "$GITHUB_OUTPUT"
@@ -55,7 +53,6 @@ jobs:
           tags: |
             type=raw,value=${{ github.ref_name }},enable=true
             type=raw,value=latest,enable=${{ steps.main_info.outputs.sha == github.sha }}
-            type=sha,enable=false
 
       - name: Build and push Docker image
         id: push
