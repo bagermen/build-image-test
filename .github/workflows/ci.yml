@@ -34,6 +34,7 @@ jobs:
 
       - name: Read SHA of main branch
         id: main_info
+        working-directory: ${{ github.workspace	}}
         run: |
           sha=$(git rev-parse  origin/main)
           echo "::add-mask::$sha"
