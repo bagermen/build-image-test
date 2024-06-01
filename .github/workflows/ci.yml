@@ -36,7 +36,7 @@ jobs:
         id: main_info
         working-directory: ${{ github.workspace	}}
         run: |
-          echo ls -la
+          echo "::debug::$(ls -la)"
           sha=$(git rev-parse  origin/main)
           echo "::add-mask::$sha"
           echo "sha=$sha" >> "$GITHUB_OUTPUT"
