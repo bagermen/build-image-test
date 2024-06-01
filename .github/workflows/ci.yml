@@ -44,7 +44,7 @@ jobs:
         with:
           images: ${{ env.IMAGE_NAME}}
           tags: |
-            - type=ref,enable=true,event=release
+            - type=raw,value=${{ github.ref_name }},enable=true
             - type=raw,value=latest,enable={{is_default_branch}}
 
       - name: Build and push Docker image
